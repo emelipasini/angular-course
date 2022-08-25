@@ -1,0 +1,13 @@
+<div class="outcome">
+    <h2 class="outcome-title">Egresos</h2>
+    <div *ngFor="let outcome of outcomes" class="element clean-styles" >
+        <div class="element-description">{{ outcome.name }}</div>
+        <div class="right clean-styles">
+            <div class="element-value">- {{ outcome.value | currency:'ARG':'$':'1.0' }}</div>
+            <div class="element-percentage">{{ outcome.percentage | percent }}</div>
+            <div class="element-delete">
+                <button class="element-delete-btn" (click)="deleteValue(outcome)">x</button>
+            </div>
+        </div>
+    </div>
+</div>

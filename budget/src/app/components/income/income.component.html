@@ -1,0 +1,12 @@
+<div class="income">
+    <h2 class="income-title">Ingresos</h2>
+    <div *ngFor="let income of incomes" class="element clean-styles">
+        <div class="element-description">{{ income.name }}</div>
+        <div class="right clean-styles">
+            <div class="element-value">+ {{ income.value | currency:'ARG':'$':'1.0' }}</div>
+            <div class="element-delete">
+                <button class="element-delete-btn" type="submit" (click)="deleteValue(income)">x</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container mt-2">
+    <div class="row mt-3">
+        <div class="col">
+            <div>
+                - {{ index + 1 }}: {{ person.firstname }} {{ person.lastname }}
+                <button type="submit" class="btn btn-sm btn-primary" (click)="emitGreeting()">Editar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div (keyup)="0">
+    <label>Repetidor: </label>
+    <input #entrada />
+    {{ entrada.value }}
+</div> -->

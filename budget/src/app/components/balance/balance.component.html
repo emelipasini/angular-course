@@ -1,0 +1,25 @@
+<div class="header">
+    <div class="budget">
+        <div class="budget-title">
+            Presupuesto Disponible:
+        </div>
+        
+        <div class="budget-value">{{ balance | currency:'ARG':'$':'1.0' }}</div>
+        
+        <div class="budget-income clean-styles">
+            <div class="income-text">Ingresos</div>
+            <div class="right">
+                <div class="income-value">+ {{ totalIncome | currency:'ARG':'$':'1.0'}}</div>
+                <div class="income-percentage">&nbsp;</div>
+            </div>
+        </div>
+        
+        <div class="budget-outcome clean-styles">
+            <div class="outcome-text">Egresos</div>
+            <div class="right clean-styles">
+                <div class="outcome-value">- {{ totalOutcome | currency:'ARG':'$':'1.0' }}</div>
+                <div class="outcome-percentage">{{ totalPercentage | percent }}</div>
+            </div>
+        </div>
+    </div>
+</div>

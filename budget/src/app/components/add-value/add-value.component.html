@@ -1,0 +1,15 @@
+<form>
+    <div class="add">
+        <div class="add-container">
+            <select (change)="setType($event)" class="add-type" [ngClass]="{redfocus: type === 'out'}">
+                <option value="in" selected>+</option>
+                <option value="out">-</option>
+            </select>
+            <input type="text" name="name" class="add-description" placeholder="Agregar Descripción" 
+                [(ngModel)]="name" [ngClass]="{redfocus: type === 'out'}">
+            <input type="number" name="value" class="add-value" placeholder="Valor" 
+                [(ngModel)]="value" [ngClass]="{redfocus: type === 'out'}">
+            <button class="add-btn btn btn-small btn-success" type="submit" (click)="addBudgetValue()">Guardar</button>
+        </div>
+    </div>
+</form>
