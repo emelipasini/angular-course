@@ -1,38 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Person } from 'src/app/models/person';
+
 import { PeopleService } from 'src/app/services/people.service';
-import { Person } from '../person/person.component';
 
 @Component({
     selector: 'app-people',
     templateUrl: './people.component.html',
-    styleUrls: ['./people.component.css'],
-    providers: [PeopleService]
+    styleUrls: ['./people.component.css']
 })
 export class PeopleComponent implements OnInit {
-    // @ViewChild("firstname") firstname: string;
-
     people: Person[];
 
-    firstname = "";
-    lastname = "";
-    newPerson: Person;
-
-    constructor(private peopleService: PeopleService) {
-        this.peopleService.greet.subscribe((name: string) => {
-            console.log(`Hola ${name}!`);
-        })
-    }
+    constructor(private router: Router, private peopleService: PeopleService) { }
 
     ngOnInit(): void {
         this.people = this.peopleService.getPeople();
     }
 
     addPerson() {
-        this.newPerson = new Person(this.firstname, this.lastname);
-        this.peopleService.addPerson(this.newPerson);
+        this.router.navigate(["people/create"]);
     }
 
-    addNewPerson(newPerson: Person) {
-        this.people.push(newPerson);
+    deletePerson(index: number) {
+        const person: Person = this.people[index];
+        if(person) {
+            this.peopleService.deletePerson(index);
+        }
     }
 }
