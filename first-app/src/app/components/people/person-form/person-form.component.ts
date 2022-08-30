@@ -19,23 +19,26 @@ export class PersonFormComponent implements OnInit {
     lastname = "";
     newPerson: Person;
 
-    constructor(private router: Router, private route: ActivatedRoute, private peopleService: PeopleService) {
-        this.peopleService.greet.subscribe((name: string) => {
-            console.log(`Hola ${name}!`);
-        })
-    }
+    constructor(private router: Router, private route: ActivatedRoute, private peopleService: PeopleService) {}
 
     ngOnInit(): void {
-        this.people = this.peopleService.getPeople();
-
         this.index = this.route.snapshot.params["id"];
         if(this.index) {
             this.title = "Editar persona:";
-            const person = this.peopleService.findPerson(this.index);
-            if(person) {
-                this.firstname = person.firstname;
-                this.lastname = person.lastname;
-            }
+
+            this.peopleService.getPeople().subscribe(
+                response => {
+                    this.people = response as unknown as Person[];
+                    this.peopleService.setPeople(this.people);
+
+                    const person = this.people[this.index];
+                    if(person) {
+                        this.firstname = person.firstname;
+                        this.lastname = person.lastname;
+                    }
+                },
+                error => console.log("error", error)
+            );
         } else {
             this.title = "Nueva persona:";
         }

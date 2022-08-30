@@ -1,37 +1,46 @@
-import { EventEmitter } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 import { Person } from "../models/person";
 
-export class PeopleService {
-    people: Person[] = [
-        new Person("Juan", "Perez"),
-        new Person("Maria", "Lopez"),
-        new Person("Jorge", "Fernandez")
-    ];
+import { DataService } from "./data.service";
 
-    getPeople() {
-        return this.people;
+@Injectable()
+export class PeopleService {
+    people: Person[] = [];
+
+    constructor(private dataService: DataService) {}
+
+    setPeople(people: Person[]) {
+        this.people = people;
     }
 
-    findPerson(index: number) {
-        const person: Person = this.people[index];
-        return person;
+    getPeople() {
+        return this.dataService.getPeople();
     }
 
     addPerson(person: Person) {
+        if(this.people === null) { this.people = []; }
         this.people.push(person);
+        this.dataService.savePeople(this.people);
     }
 
     editPerson(index: number, person: Person) {
         const personToEdit: Person = this.people[index];
         if(personToEdit) {
             this.people[index] = person;
+            this.dataService.editPerson(index, person);
         }
     }
 
     deletePerson(index: number) {
         this.people.splice(index, 1);
+        this.dataService.deletePerson(index);
+        this.reSavePeople();
     }
 
-    greet = new EventEmitter<string>();
+    reSavePeople() {
+        if(this.people !== null) {
+            this.dataService.savePeople(this.people);
+        }
+    }
 }

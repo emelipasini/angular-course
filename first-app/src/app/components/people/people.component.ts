@@ -16,7 +16,13 @@ export class PeopleComponent implements OnInit {
     constructor(private router: Router, private peopleService: PeopleService) { }
 
     ngOnInit(): void {
-        this.people = this.peopleService.getPeople();
+        this.peopleService.getPeople().subscribe(
+            response => {
+                this.people = response as unknown as Person[];
+                this.peopleService.setPeople(this.people);
+            },
+            error => console.log("error", error)
+        );
     }
 
     addPerson() {
