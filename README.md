@@ -4,6 +4,6 @@
 
 ### Ejercicios
 
-- first-app es una aplicacion en la que se van aplicando los conocimientos del curso, no esta muy ordenada por el momento.
+- first-app es una aplicacion en la que se van aplicando los conocimientos del curso, tiene un manejo de datos sencillo con una base de datos de Realtime de Firebase.
 - budget es una aplicacion sencilla en la que se tienen los ingresos y egresos del mes y se pueden agregar y eliminar los registros.
 

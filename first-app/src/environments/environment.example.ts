@@ -1,4 +1,8 @@
 export const environment = {
     production: false,
-    database: ""
+    firebase: {
+        database: "",
+        apiKey: "",
+        authDomain: ""
+    }
 };
