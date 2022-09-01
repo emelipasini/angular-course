@@ -16,6 +16,7 @@ import { PersonFormComponent } from './components/people/person-form/person-form
 import { PeopleService } from './services/people.service';
 import { DataService } from './services/data.service';
 import { LoginService } from './services/login.service';
+import { GuardianService } from './services/guardian.service';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { LoginService } from './services/login.service';
     providers: [
         PeopleService,
         DataService,
-        LoginService
+        LoginService,
+        GuardianService
     ],
     bootstrap: [AppComponent]
 })

@@ -8,10 +8,12 @@ import { ErrorComponent } from './components/error/error.component';
 import { PeopleComponent } from './components/people/people.component';
 import { PersonFormComponent } from './components/people/person-form/person-form.component';
 
+import { GuardianService } from './services/guardian.service';
+
 const routes: Routes = [
     { path: "", component: HomeComponent },
     {
-        path: "people", component: PeopleComponent, children: [
+        path: "people", component: PeopleComponent, canActivate:[GuardianService], children: [
             { path: "create", component: PersonFormComponent },
             { path: ":id", component: PersonFormComponent }
         ]

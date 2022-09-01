@@ -16,28 +16,28 @@ export class DataService {
     }
 
     getPeople() {
+        this.token = this.loginService.getToken();
         return this.httpClient.get(`${environment.firebase.database}/people.json?auth=${this.token}`);
     }
 
     savePeople(people: Person[]) {
         this.httpClient.put(`${environment.firebase.database}/people.json?auth=${this.token}`, people).subscribe(
             response => { console.log("response: " + response); },
-            error => { console.log("error: " + error); }
+            error => { console.error("Error trying to save the data", error); }
         );
     }
 
     editPerson(index: number, person: Person) {
-        const url = `${environment.firebase.database}/people/${index}.json?auth=${this.token}`;
-        this.httpClient.put(url, person).subscribe(
+        this.httpClient.put(`${environment.firebase.database}/people/${index}.json?auth=${this.token}`, person).subscribe(
             response => console.log("modified", response),
-            error => console.log("error", error)
+            error => console.error("Error trying to edit a person", error)
         );
     }
 
     deletePerson(index: number) {
         this.httpClient.delete(`${environment.firebase.database}/people/${index}.json?auth=${this.token}`).subscribe(
             response => console.log("deleted", response),
-            error => console.log("error", error)
+            error => console.error("Error trying to delete a person", error)
         );
     }
 }

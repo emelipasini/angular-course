@@ -15,6 +15,10 @@ export class LoginComponent {
         const email = form.value.email;
         const password = form.value.password;
 
-        await this.loginService.login(email, password);
+        try {
+            await this.loginService.login(email, password);
+        } catch (error) {
+            console.error("Error trying to login",error);
+        }
     }
 }
