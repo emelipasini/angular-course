@@ -1,1 +1,109 @@
-<p>client-form works!</p>
+<header class="py-2 bg-info text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>
+                    <i class="fas fa-user"></i>
+                    {{ title }}
+                </h3>
+            </div>
+        </div>
+    </div>
+</header>
+
+<form #formClient="ngForm" (ngSubmit)="saveClient(formClient)">
+    <section class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a routerLink="/clients" class="btn btn-light btn-block">
+                        <i class="fas fa-arrow-left"></i>
+                        Atras
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="fas fa-check"></i>
+                        Guardar
+                    </button>
+                </div>
+                <div *ngIf="id" class="col-md-3">
+                    <button class="btn btn-danger btn-block" (click)="deleteClient()">
+                        <i class="fas fa-trash"></i>
+                        Eliminar cliente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Edicion</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="firstname">Nombre</label>
+                                <input type="text" class="form-control" name="firstname"
+                                    #firstname="ngModel" [(ngModel)]="client.firstname"
+                                    [ngClass]="{'is-invalid': firstname.errors && firstname.touched}"
+                                    required minlength="2"
+                                >
+                                <div [hidden]="!firstname.errors?.required" class="invalid-feedback">
+                                    El nombre es obligatorio
+                                </div>
+                                <div [hidden]="!firstname.errors?.minlength" class="invalid-feedback">
+                                    El nombre debe contener al menos 2 caracteres
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Apellido</label>
+                                <input type="text" class="form-control" name="lastname"
+                                    #lastname="ngModel" [(ngModel)]="client.lastname"
+                                    [ngClass]="{'is-invalid': lastname.errors && lastname.touched}"
+                                    required minlength="2"
+                                >
+                                <div [hidden]="!lastname.errors?.required" class="invalid-feedback">
+                                    El apellido es obligatorio
+                                </div>
+                                <div [hidden]="!lastname.errors?.minlength" class="invalid-feedback">
+                                    El apellido debe contener al menos 2 caracteres
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email"
+                                    #email="ngModel" [(ngModel)]="client.email"
+                                    [ngClass]="{'is-invalid': email.errors && email.touched}"
+                                    required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                >
+                                <div [hidden]="!email.errors?.pattern" class="invalid-feedback">
+                                    El correo no es valido
+                                </div>
+                                <div [hidden]="!email.errors?.required" class="invalid-feedback">
+                                    El correo es obligatorio
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="balance">Saldo</label>
+                                <input type="number" class="form-control" name="balance"
+                                    #balance="ngModel" [(ngModel)]="client.balance"
+                                    [ngClass]="{'is-invalid': balance.errors && balance.touched}"
+                                    required min="0"
+                                >
+                                <div [hidden]="!balance.errors?.min" class="invalid-feedback">
+                                    El saldo debe ser mayor a 0
+                                </div>
+                                <div [hidden]="!balance.errors?.required" class="invalid-feedback">
+                                    El saldo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

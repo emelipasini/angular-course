@@ -1,0 +1,65 @@
+<section class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 m-4">
+                <button class="btn btn-primary btn-block" (click)="addClient()">
+                    <i class="fas fa-plus"></i>
+                    Nuevo cliente
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Listado de clientes</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Saldo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of clients; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ client.firstname }} {{ client.lastname }}</td>
+                                <td>{{ client.email }}</td>
+                                <td>{{ client.balance | currency }}</td>
+                                <td><a routerLink="/clients/edit/{{client.id}}">Editar</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-center bg-danger text-white">
+                    <h4>Saldo total</h4>
+                    <div class="card-body">
+                        <h5>{{ getTotalBalance() | currency }}</h5>
+                    </div>
+                </div>
+
+                <div class="card text-center bg-success text-white mt-2">
+                    <h4>Total clientes</h4>
+                    <div class="card-body">
+                        <h5>
+                            {{ clients.length }}
+                            <i class="fas fa-user"></i>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

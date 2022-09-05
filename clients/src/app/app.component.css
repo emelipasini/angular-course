@@ -1,3 +1,7 @@
 nav li, nav a {
     color: white;
 }
+
+.dropdown-link a {
+    color: black;
+}

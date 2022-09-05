@@ -16,7 +16,7 @@ export class ClientService {
     }
 
     getAll() {
-        return collectionData(this.clientsCollection) as Observable<Client[]>;
+        return collectionData(this.clientsCollection, { idField: "id" }) as Observable<Client[]>;
     }
 
     getById(id: string) {
@@ -29,7 +29,7 @@ export class ClientService {
     }
 
     update(client: Client) {
-        const clientToEdit = doc(this.firestore, `clients/${client.firstname}`);
+        const clientToEdit = doc(this.firestore, `clients/${client.id}`);
         return updateDoc(clientToEdit, { ...client });
     }
 

@@ -4,9 +4,10 @@ import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { ErrorPageComponent } from "./components/error-page/error-page.component";
-
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+
 import { ClientsComponent } from "./components/clients/clients.component";
+import { ClientComponent } from "./components/clients/client/client.component";
 import { ClientFormComponent } from "./components/clients/client-form/client-form.component";
 
 const routes: Routes = [
@@ -15,8 +16,9 @@ const routes: Routes = [
     { path: "register", component: RegisterComponent },
     {
         path: "clients", component: ClientsComponent, children: [
+            { path: "", component: ClientComponent },
             { path: "create", component: ClientFormComponent },
-            { path: "edit", component: ClientFormComponent }
+            { path: "edit/:id", component: ClientFormComponent }
         ]
     },
     { path: "**", component: ErrorPageComponent }
