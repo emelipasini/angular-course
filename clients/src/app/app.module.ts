@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { ClientComponent } from './components/clients/client/client.component';
 import { ClientFormComponent } from './components/clients/client-form/client-form.component';
+
+import { AuthService } from './services/auth.service';
 
 import { environment } from 'src/environments/environment';
 
@@ -36,7 +39,10 @@ import { environment } from 'src/environments/environment';
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         provideFirestore(() => getFirestore())
     ],
-    providers: [],
+    providers: [
+        AuthService,
+        { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
