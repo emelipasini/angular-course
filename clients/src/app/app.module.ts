@@ -18,6 +18,8 @@ import { ClientComponent } from './components/clients/client/client.component';
 import { ClientFormComponent } from './components/clients/client-form/client-form.component';
 
 import { AuthService } from './services/auth.service';
+import { LoginRoutesGuard } from './guards/login-routes.guard';
+import { LogoutRoutesGuard } from './guards/logout-routes.guard';
 
 import { environment } from 'src/environments/environment';
 
@@ -41,6 +43,8 @@ import { environment } from 'src/environments/environment';
     ],
     providers: [
         AuthService,
+        LoginRoutesGuard,
+        LogoutRoutesGuard,
         { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
     ],
     bootstrap: [AppComponent]

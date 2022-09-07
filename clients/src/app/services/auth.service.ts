@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user';
 export class AuthService {
     user = new User("", "");
 
-    constructor(private angularAuth: AngularFireAuth) { }
+    constructor(private angularFireAuth: AngularFireAuth) { }
 
     async login(email: string, password: string) {
         try {
@@ -28,10 +28,10 @@ export class AuthService {
     }
 
     getLoggedUser() {
-        return this.angularAuth.authState.pipe(map(auth => auth));
+        return this.angularFireAuth.authState.pipe(map(auth => auth));
     }
 
     logout() {
-        this.angularAuth.signOut();
+        this.angularFireAuth.signOut();
     }
 }

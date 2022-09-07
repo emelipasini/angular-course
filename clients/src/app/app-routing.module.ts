@@ -10,12 +10,15 @@ import { ClientsComponent } from "./components/clients/clients.component";
 import { ClientComponent } from "./components/clients/client/client.component";
 import { ClientFormComponent } from "./components/clients/client-form/client-form.component";
 
+import { LoginRoutesGuard } from "./guards/login-routes.guard";
+import { LogoutRoutesGuard } from "./guards/logout-routes.guard";
+
 const routes: Routes = [
     { path: "", component: DashboardComponent },
-    { path: "login", component: LoginComponent },
-    { path: "register", component: RegisterComponent },
+    { path: "login", component: LoginComponent, canActivate: [LogoutRoutesGuard] },
+    { path: "register", component: RegisterComponent, canActivate: [LogoutRoutesGuard] },
     {
-        path: "clients", component: ClientsComponent, children: [
+        path: "clients", component: ClientsComponent, canActivate: [LoginRoutesGuard], children: [
             { path: "", component: ClientComponent },
             { path: "create", component: ClientFormComponent },
             { path: "edit/:id", component: ClientFormComponent }
