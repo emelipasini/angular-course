@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 import { map } from "rxjs/operators";
 
@@ -33,5 +33,14 @@ export class AuthService {
 
     logout() {
         this.angularFireAuth.signOut();
+    }
+
+    async register(email: string, password: string) {
+        try {
+            const auth = getAuth();
+            await createUserWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            console.error("There was an error trying to register the user", error);
+        }
     }
 }

@@ -5,3 +5,10 @@ nav li, nav a {
 .dropdown-link a {
     color: black;
 }
+
+.footer {
+    position: absolute;
+    bottom: 0%;
+    display: block;
+    width: 100%;
+}

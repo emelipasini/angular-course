@@ -17,10 +17,14 @@ export class LoginComponent {
     constructor(private authService: AuthService, private router: Router) { }
 
     async login(form: NgForm) {
-        if(!form.valid) return;
-        
-        const value = form.value;
-        await this.authService.login(value.email, value.password);
-        this.router.navigate([""]);
+        try {
+            if(!form.valid) return;
+            
+            const value = form.value;
+            await this.authService.login(value.email, value.password);
+            this.router.navigate([""]);
+        } catch (error) {
+            console.error("There was an error trying to login the user", error);
+        }
     }
 }
